@@ -1,13 +1,16 @@
 {
-  "name": "imba-boilerplate",
-  "version": "0.1.0",
-  "description": "Imba boilerplate",
+  "name": "todos",
+  "version": "0.0.1",
+  "description": "TodoMVC using Imba and GunDB",
   "scripts": {
     "start": "node ./babel-server",
     "build": "NODE_ENV=production node ./node_modules/webpack/bin/webpack.js -p --progress --verbose --colors --display-modules --display-error-details --config webpack.client-build.js"
   },
-  "repository": {},
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jveres/todos.git"
+  },
+  "keywords": ["imba", "javascript", "gundb", "animations", "realtime", "todomvc"],
   "author": "jveres",
   "license": "MIT",
   "devDependencies": {
