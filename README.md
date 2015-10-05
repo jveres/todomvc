@@ -1,7 +1,7 @@
 # todomvc
 Realtime TodoMVC experience using [Imba](http://imba.io) and [GunDB](http://gundb.io)
 
-# [TRY HERE](http://loqali.com:3000)
+You can try online [HERE](http://loqali.com:3000).
 
 You need [node](http://nodejs.org/) to run locally:
 ```bash
