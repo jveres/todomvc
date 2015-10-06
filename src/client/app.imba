@@ -61,15 +61,15 @@ tag app
 	def onkeydown e
 		return unless e.which == ENTER_KEY
 		if var value = e.target.value.trim
-			model.addTodo(value)
+			model.add-todo(value)
 			e.target.value = ""
 
 	def toggleAll e
-		model.toggleAll e.target.checked
+		model.toggle-all e.target.checked
 		
 	def clearCompleted
 		%%(.toggle-all).checked = no
-		model.clearCompleted
+		model.clear-completed
 
 	def list items
 		for item, index in items

@@ -37,13 +37,13 @@ global class TodoModel
 	def uid
 		'I' + Gun:time.now + 'R' + Gun:text.random 5
 
-	def addTodo title
+	def add-todo title
 		put(uid(), {title: title, completed: no})
 
-	def toggleAll state
-		setCompleted(item, state) for item in items
+	def toggle-all state
+		set-completed(item, state) for item in items
 		
-	def setCompleted item, completed = yes
+	def set-completed item, completed = yes
 		put(item:id, {title: item:title, completed: completed})
 
 	def toggle item
@@ -51,24 +51,17 @@ global class TodoModel
 
 	def destroy item
 		put(item:id, null)
-		self
 
 	def save item
 		put(item:id, item)
-		self
 
 	def rename item, title
 		put(item:id, {title: title, completed: item:completed})
-		self
 
-	def clearCompleted
+	def clear-completed
 		items.map do |item| destroy(item) if item:completed
 		self
 
-	def clearAll
-		items.map do |item| destroy(item)
-		self
-	
 	def load
 		@gun = Gun(window:location:origin + '/gun').get(@key).not(do
 			this.put({"{uid()}": {title: 'Digg it...😋😋😋😋😋😜😜😜😜😜',completed: no}}).key(@key)

@@ -30,10 +30,13 @@ var gun = Gun({
 gun.attach(app);
 app.use(express.static(__dirname));
 
-app.listen(3000, '0.0.0.0', function(err) {
+var port = (process.env.NODE_ENV !== 'production' ? '4000' : '3000');
+var host = (process.env.NODE_ENV !== 'production' ? '0.0.0.0' : 'localhost');
+
+app.listen(port, host, function(err) {
   if (err) {
     console.log(err);
     return;
   }
-  console.log('Listening at http://localhost:3000');
+  console.log('Listening at http://' + host + ':' + port);
 });
