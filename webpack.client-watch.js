@@ -26,11 +26,11 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx$/, loader: 'babel', include: path.join(__dirname, 'src/client'), exclude: /node_modules/
+        test: /\.jsx/, loader: 'babel', include: path.join(__dirname, 'src/client'), exclude: /node_modules/
       }, { 
-        test: /\.imba$/, loader: 'imba', include: path.join(__dirname, 'src/client')
+        test: /\.imba/, loader: 'imba', include: path.join(__dirname, 'src/client')
       }, {
-        test: /\.css$/, loader: "style!css!autoprefixer", include: path.join(__dirname, 'src/client')
+        test: /\.css/, loader: "style!css!autoprefixer", include: path.join(__dirname, 'src/client')
       }
     ]
   }

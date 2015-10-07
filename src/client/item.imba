@@ -55,9 +55,13 @@ tag todo < li
 		@editing = no
 		unflag(:editing)
 		var title = @input.value.trim
-		@object:title = title
-		title ? model.rename(object, title) : model.destroy(object)
-		render
+		if @object:title != title
+			@object:title = title
+			if title
+				model.rename(object, title)
+			else 
+				model.destroy(object)
+			render
 
 	def onfocusout e
 		submit if @editing

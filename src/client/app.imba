@@ -38,7 +38,7 @@ extend tag htmlelement
 		@dom:style:top = "{y}px" # set position
 		@y = y # 
 		return self
-		
+
 tag app
 
 	def hash
@@ -49,7 +49,7 @@ tag app
 
 	def build
 		@model = Todos
-		@model.subscribe do render
+		@model.subscribe(do render)
 		@model.load
 		window.addEventListener "hashchange" do
 			@hash = window:location:hash

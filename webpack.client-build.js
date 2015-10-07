@@ -5,7 +5,7 @@ var execSync = require('child_process').execSync;
 
 execSync("cp " +  path.join(__dirname, 'src/server/index.html') + " dist" );
 execSync("cp " +  path.join(__dirname, 'src/server/server.js') + " dist" );
-execSync("cp " +  path.join(__dirname, 'data.json') + " dist ; exit 0" );
+//execSync("cp " +  path.join(__dirname, 'data.json') + " dist ; exit 0" );
 
 module.exports = {
   entry: [

@@ -22,10 +22,17 @@ global class TodoModel
 			return  1 if a < b # time desc
 			return -1 if a > b
 			return  0
+			
+	def notify
+		fn() for fn in @listeners
 
 	def inform
-		clearTimeout(@timeout) if @timeout
-		@timeout = setTimeout(&, INFORM_DEBOUNCE) do fn(self) for fn in @listeners
+		if @timeout
+			clearTimeout(@timeout)
+			@timeout = setTimeout(&, INFORM_DEBOUNCE) do notify()
+		else
+			@timeout = setTimeout(&, INFORM_DEBOUNCE) do @timeout = null
+			notify()
 		self
 		
 	def put id, todo, cb
@@ -74,11 +81,11 @@ global class TodoModel
 				@items.splice(@items.indexOf(todo), 1)
 				inform
 			elif todo # updated item
-				if todo != item
+				if (todo:title != item:title) or (todo:completed != item:completed)
 					todo:title = item:title or "<untitled>"
 					todo:completed = item:completed or no
 					inform
-			elif item and not todo # new item
+			elif item # new item
 				@items.push({id: id, title: item:title, completed: (item:completed or no)})
 				inform
 		self

@@ -189,6 +189,7 @@ label[for='toggle-all'] {
 	max-width: 80%;
 	line-height: 1.2;
 	transition: color 0.3s;
+	transform-origin: 0% 50%;
 }
 
 .todo-list li.completed label {
