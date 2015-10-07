@@ -10,6 +10,9 @@ Todos = TodoModel.new "todo/data"
 var raf = window:requestAnimationFrame || setTimeout
 var next-tick = (|fn| raf(do raf fn) if fn)
 
+var MAX-PERISCOPE-HEARTS = 10
+var periscope-hearts = 0
+
 extend tag htmlelement
 
 	var bounces = ["up", "down"]
@@ -47,7 +50,9 @@ tag heart < div
 	
 	def build
 		# TODO: recycle instead of orphanize
-		setTimeout(&, 5000) do orphanize # remove from dom
+		setTimeout(&, 5000) do 
+			orphanize # remove from dom
+			periscope-hearts--
 		render
 		self
 	
@@ -55,6 +60,7 @@ tag heart < div
 		flag flys[Math.floor(Math.random * flys:length)] # random animation
 		@dom:style:font-size = Math.floor(Math.random * 8) + 14 + "px" # random size
 		<self.heart> "{hearts[Math.floor(Math.random * hearts:length)]}" # random color
+		periscope-hearts++
 	
 tag app
 
@@ -67,7 +73,7 @@ tag app
 	def build
 		@model = Todos
 		@model.subscribe(do
-			%%(#hearts).append(<heart>) # show periscope heart
+			%%(#hearts).append(<heart>) if periscope-hearts < MAX-PERISCOPE-HEARTS # show periscope heart
 			render # re-render app
 		)
 		@model.load
