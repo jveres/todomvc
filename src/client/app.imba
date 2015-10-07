@@ -1,5 +1,6 @@
 import 'imba'
 import 'index.css'
+import 'app.css'
 import 'model'
 import ENTER_KEY, ITEM_HEIGHT from 'item'
 
@@ -30,15 +31,31 @@ extend tag htmlelement
 		
 	# attribute for animated positioning
 	def move-to= y
-		next-tick do dom:style:opacity = 1 if dom:style:opacity == 0 # fadein
-		return self if dom:style:top == "{y}px" # simple debounce rule
+		next-tick do @dom:style:opacity = 1 if @dom:style:opacity == 0 # fadein
+		return self if @dom:style:top == "{y}px" # simple debounce rule
 		# TODO: apply animation only when the visible viewport contains the element
 		bounce "up" if ~~y < ~~@y # moving up
 		bounce "down" if not @y or ~~y > ~~@y # newly inserted or moving down
 		@dom:style:top = "{y}px" # set position
 		@y = y # 
 		return self
+		
+tag heart < div
 
+	var hearts = ["\uD83D\uDC9C", "\uD83D\uDC9A", "\uD83D\uDC9B", "\uD83D\uDC99"] # these are HTML hearts with different color
+	var flys = ["fly-1", "fly-2", "fly-3"] # css animations
+	
+	def build
+		# TODO: recycle instead of orphanize
+		setTimeout(&, 5000) do orphanize # remove from dom
+		render
+		self
+	
+	def render
+		flag flys[Math.floor(Math.random * flys:length)] # random animation
+		@dom:style:font-size = Math.floor(Math.random * 8) + 14 + "px" # random size
+		<self.heart> "{hearts[Math.floor(Math.random * hearts:length)]}" # random color
+	
 tag app
 
 	def hash
@@ -49,7 +66,10 @@ tag app
 
 	def build
 		@model = Todos
-		@model.subscribe(do render)
+		@model.subscribe(do
+			%%(#hearts).append(<heart>) # show periscope heart
+			render # re-render app
+		)
 		@model.load
 		window.addEventListener "hashchange" do
 			@hash = window:location:hash
@@ -96,6 +116,8 @@ tag app
 					<ul.todo-list>
 						list(items)
 
+			<#hearts>
+			
 			if len
 				<footer.footer move-to="{items:length * ITEM_HEIGHT}">
 					<span.todo-count>
