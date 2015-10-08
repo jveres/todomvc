@@ -52,11 +52,12 @@ input[type="checkbox"] {
 	outline: none;
 }
 
-.header { 
-	position: relative; 
+.header {
+	position: relative;
 }
 
 .header h1 {
+	display: inline-block;
 	color: #5dc2af;
 }
 

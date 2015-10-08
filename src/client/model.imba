@@ -27,12 +27,8 @@ global class TodoModel
 		fn() for fn in @listeners
 
 	def inform
-		if @timeout
-			clearTimeout(@timeout)
-			@timeout = setTimeout(&, INFORM_DEBOUNCE) do notify()
-		else
-			@timeout = setTimeout(&, INFORM_DEBOUNCE) do @timeout = null
-			notify()
+		clearTimeout(@timeout) if @timeout
+		@timeout = setTimeout(&, INFORM_DEBOUNCE) do notify()
 		self
 		
 	def put id, todo, cb

@@ -50,7 +50,7 @@ tag heart < div
 	
 	def build
 		# TODO: recycle instead of orphanize
-		setTimeout(&, 5000) do 
+		setTimeout(&, 4000) do 
 			orphanize # remove from dom
 			periscope-hearts--
 		render
@@ -59,7 +59,8 @@ tag heart < div
 	def render
 		flag flys[Math.floor(Math.random * flys:length)] # random animation
 		@dom:style:font-size = Math.floor(Math.random * 8) + 14 + "px" # random size
-		<self.heart> "{hearts[Math.floor(Math.random * hearts:length)]}" # random color
+		<self.heart>
+			"{hearts[Math.floor(Math.random * hearts:length)]}" # random color
 		periscope-hearts++
 	
 tag app
@@ -73,7 +74,7 @@ tag app
 	def build
 		@model = Todos
 		@model.subscribe(do
-			%%(#hearts).append(<heart>) if periscope-hearts < MAX-PERISCOPE-HEARTS # show periscope heart
+			$$(#heartbox).append(<heart>) if periscope-hearts < MAX-PERISCOPE-HEARTS # show periscope heart
 			render # re-render app
 		)
 		@model.load
@@ -114,6 +115,7 @@ tag app
 		<self>
 			<header.header>
 				<h1> "todos"
+				<#heartbox>
 				<input.new-todo type='text' placeholder='What to do?'>
 
 			if len
@@ -121,8 +123,6 @@ tag app
 					<input.toggle-all type='checkbox' checked=(done:length == len) :change='toggleAll'>
 					<ul.todo-list>
 						list(items)
-
-			<#hearts>
 			
 			if len
 				<footer.footer move-to="{items:length * ITEM_HEIGHT}">
