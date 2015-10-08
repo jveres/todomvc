@@ -2,6 +2,7 @@ import 'imba'
 import 'index.css'
 import 'app.css'
 import 'model'
+import play from 'anima'
 import ENTER_KEY, ITEM_HEIGHT from 'item'
 
 Todos = TodoModel.new "todo/data"
@@ -14,22 +15,14 @@ var MAX-PERISCOPE-HEARTS = 10
 var periscope-hearts = 0
 
 extend tag htmlelement
-
-	var bounces = ["up", "down"]
 	
 	# using pure CSS animations makes it performant even on an old N7
-	def bounce a
-		var b = bounces[1 - bounces.indexOf(a)]
-		["bounce-{b}-1", "bounce-{b}-2"].map(|f| unflag f)
-		# this way we can play the same CSS animation repeatedly *uhm*
-		if hasFlag "bounce-{a}-1"
-			unflag "bounce-{a}-1"
-			flag "bounce-{a}-2"
-		elif hasFlag "bounce-{a}-2"
-			unflag "bounce-{a}-2"
-			flag "bounce-{a}-1"
+	def bounce dir
+		if not @bounce or @bounce == "bounce-{dir}-2"
+			@bounce = "bounce-{dir}-1"
 		else
-			flag "bounce-{a}-1"
+			@bounce = "bounce-{dir}-2"
+		play @dom, @bounce
 		self
 		
 	# attribute for animated positioning
@@ -46,18 +39,12 @@ extend tag htmlelement
 tag heart < div
 
 	var hearts = ["\uD83D\uDC9C", "\uD83D\uDC9A", "\uD83D\uDC9B", "\uD83D\uDC99"] # these are HTML hearts with different color
-	var flys = ["fly-1", "fly-2", "fly-3"] # css animations
-	
-	def build
-		# TODO: recycle instead of orphanize
-		setTimeout(&, 4000) do 
-			orphanize # remove from dom
-			periscope-hearts--
-		render
-		self
 	
 	def render
-		flag flys[Math.floor(Math.random * flys:length)] # random animation
+		play @dom, "fly-{Math.floor(Math.random * 3) + 1}", do
+			# TODO: recycle instead of orphanize
+			orphanize # remove from dom
+			periscope-hearts--
 		@dom:style:font-size = Math.floor(Math.random * 8) + 14 + "px" # random size
 		<self.heart>
 			"{hearts[Math.floor(Math.random * hearts:length)]}" # random color

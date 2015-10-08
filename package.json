@@ -10,7 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/jveres/todos.git"
   },
-  "keywords": ["imba", "javascript", "gundb", "animations", "realtime", "todomvc"],
+  "keywords": [
+    "imba",
+    "javascript",
+    "gundb",
+    "animations",
+    "realtime",
+    "todomvc"
+  ],
   "author": "jveres",
   "license": "MIT",
   "devDependencies": {
@@ -19,6 +26,7 @@
     "babel-core": "^5.4.7",
     "babel-eslint": "^3.1.9",
     "babel-loader": "^5.1.2",
+    "create-keyframe-animation": "^0.1.0",
     "css-loader": "^0.19.0",
     "eslint": "^1.3.1",
     "express": "^4.13.3",
