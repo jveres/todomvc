@@ -102,7 +102,7 @@ tag app
 		<self>
 			<header.header>
 				<h1> "todos"
-				<#heartbox>
+				<p#heartbox>
 				<input.new-todo type='text' placeholder='What to do?'>
 
 			if len
