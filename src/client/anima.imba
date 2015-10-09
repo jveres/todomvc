@@ -1,5 +1,3 @@
-# Animation helpers
-
 import 'create-keyframe-animation' as animations
 
 var spring = [
@@ -63,8 +61,8 @@ animations.registerAnimation({
 	}
 })
 
+# generate heart fly effects
 var fly-time = [0, 40, 50, 60, 80, 100]
-
 var fly-1 = [
 	[
 		opacity: 0
@@ -151,6 +149,7 @@ fly-time.reduce((|p, c|
 	p+1)
 , 0)
 
+# register animations
 animations.registerAnimation(
 	name: "fly-1"
 	animation: fly-animation-1
@@ -163,7 +162,7 @@ animations.registerAnimation(
 	name: "fly-2"
 	animation: fly-animation-2
 	presets:
-		duration: 1800,
+		duration: 1800
 		easing: "linear"
 )
 
@@ -175,5 +174,6 @@ animations.registerAnimation(
 		easing: "linear"
 )
 
+# play registered animation
 export def play dom, name, cb
 	animations.runAnimation(dom, name, cb)
