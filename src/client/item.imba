@@ -56,7 +56,7 @@ tag todo < li
 		unflag(:editing)
 		var title = @input.value.trim
 		if @object:title != title
-			@object:title = title
+			@object:title = title # TODO: handle this case better
 			if title
 				model.rename(object, title)
 			else 

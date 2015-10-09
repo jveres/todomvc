@@ -33,7 +33,7 @@ extend tag htmlelement
 		bounce "up" if ~~y < ~~@y # moving up
 		bounce "down" if not @y or ~~y > ~~@y # newly inserted or moving down
 		@dom:style:top = "{y}px" # set position
-		@y = y # 
+		@y = y # save position
 		return self
 		
 tag heart < div
@@ -41,14 +41,19 @@ tag heart < div
 	var hearts = ["\uD83D\uDC9C", "\uD83D\uDC9A", "\uD83D\uDC9B", "\uD83D\uDC99"] # these are HTML hearts with different color
 	
 	def render
-		play @dom, "fly-{Math.floor(Math.random * 3) + 1}", do
+		<self.heart> "{@heart}"
+	
+	def build
+		@heart = hearts[Math.floor(Math.random * hearts:length)] # random heart
+		@fly = "fly-{Math.floor(Math.random * 3) + 1}" # random fly animation
+		@dom:style:font-size = Math.floor(Math.random * 6) + 15 + "px" # random size
+		play @dom, @fly, do
 			# TODO: recycle instead of orphanize
 			orphanize # remove from dom
 			periscope-hearts--
-		@dom:style:font-size = Math.floor(Math.random * 8) + 14 + "px" # random size
-		<self.heart>
-			"{hearts[Math.floor(Math.random * hearts:length)]}" # random color
 		periscope-hearts++
+		render
+		self
 	
 tag app
 

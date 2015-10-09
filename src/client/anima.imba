@@ -65,59 +65,60 @@ var fly-time = [0, 40, 50, 60, 80, 100]
 var fly-1 = [
 	[
 		opacity: 0
-		translate: [0, 8]
+		translate: [3, 8]
 	]
 	[
 		opacity: 0.3
 		translate: [6, -20]
 	]
 	[
-		opacity: 0.1
-		translate: [0, -30]
+		opacity: 0.4
+		translate: [4, -30]
 	]
 	[
-		opacity: 0.2
+		opacity: 0.3
 		translate: [2, -40]
 	]
 	[
-		translate: [7, -50]
+		opacity: 0.1
+		translate: [5, -50]
 	]
 	[
 		opacity: 0
-		translate: [12, -90]
+		translate: [8, -70]
 	]
 ]
 
 var fly-2 = [
 	[
 		opacity: 0
-		translate: [0, 0]
+		translate: [-2, 6]
 	]
 	[
 		opacity: 0.2
-		translate: [3, -20]
+		translate: [-3, -20]
 	]
 	[
 		opacity: 0.3
-		translate: [8, -30]
+		translate: [-6, -30]
 	]
 	[
 		opacity: 0.2
-		translate: [6, -40]
+		translate: [-5, -40]
 	]
 	[
-		translate: [5, -50]
+		translate: [-3, -50]
 	]
 	[
 		opacity: 0
-		translate: [4, -80]
+		translate: [-4, -80]
 	]
 ]
 
 var fly-3 = [
 	[
 		opacity: 0
-		translate: [3, 0]
+		translate: [3, 4]
 	]
 	[
 		opacity: 0.2

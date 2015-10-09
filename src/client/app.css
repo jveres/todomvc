@@ -6,4 +6,5 @@
 .heart {
 	position: absolute;
 	opacity: 0;
+	padding-top: 4px;
 }
