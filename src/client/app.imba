@@ -110,13 +110,13 @@ tag app
 				<p#heartbox>
 				<input.new-todo type='text' placeholder='What to do?'>
 
-			if len
+			if len > 0
 				<section.main>
 					<input.toggle-all type='checkbox' checked=(done:length == len) :change='toggleAll'>
 					<ul.todo-list>
 						list(items)
 			
-			if len
+			if len > 0
 				<footer.footer move-to="{items:length * ITEM_HEIGHT}">
 					<span.todo-count>
 						<strong> "{active:length} "
@@ -125,7 +125,7 @@ tag app
 						<li> <a .selected=(items == all) href='#/'> "All"
 						<li> <a .selected=(items == active) href='#/active'> "Active"
 						<li> <a .selected=(items == done) href='#/completed'> "Completed"
-					if done:length
+					if done:length > 0
 						<button.clear-completed :tap='clearCompleted'> "Clear completed"
 
 # create an instance of the app (with id app)

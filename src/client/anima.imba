@@ -64,12 +64,13 @@ animations.registerAnimation({
 var fly-time = [0, 40, 50, 60, 80, 100]
 var fly-1 = [
 	[
+		rotate: 8
 		opacity: 0
-		translate: [3, 8]
+		translate: [3, -3]
 	]
 	[
 		opacity: 0.3
-		translate: [6, -20]
+		translate: [8, -20]
 	]
 	[
 		opacity: 0.4
@@ -84,6 +85,7 @@ var fly-1 = [
 		translate: [5, -50]
 	]
 	[
+		rotate: 0
 		opacity: 0
 		translate: [8, -70]
 	]
@@ -91,8 +93,9 @@ var fly-1 = [
 
 var fly-2 = [
 	[
+		rotate: -22
 		opacity: 0
-		translate: [-2, 6]
+		translate: [-2, -5]
 	]
 	[
 		opacity: 0.2
@@ -110,15 +113,17 @@ var fly-2 = [
 		translate: [-3, -50]
 	]
 	[
+		rotate: 0
 		opacity: 0
-		translate: [-4, -80]
+		translate: [-4, -70]
 	]
 ]
 
 var fly-3 = [
 	[
+		rotate: 15
 		opacity: 0
-		translate: [3, 4]
+		translate: [3, -10]
 	]
 	[
 		opacity: 0.2
@@ -136,8 +141,9 @@ var fly-3 = [
 		translate: [7, -60]
 	]
 	[
+		rotate: 0
 		opacity: 0
-		translate: [5, -80]
+		translate: [5, -70]
 	]
 ]
 
