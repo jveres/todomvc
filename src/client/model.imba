@@ -34,7 +34,6 @@ global class TodoModel
 	def put id, todo, cb
 		return unless id
 		var obj = todo ? {title: (todo:title or "<untitled>"), completed: (todo:completed or no)} : null
-		console.log 'put: ', obj
 		@todos.path(id).put(obj, cb)
 		self
 		
