@@ -41,7 +41,7 @@ var gun = Gun({
 	}
 });
 
-gun.attach(app);
+gun.wsp(app);
 
 app.listen(port, host, function(err) {
   if (err) {

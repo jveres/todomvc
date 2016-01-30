@@ -34,7 +34,8 @@ global class TodoModel
 	def put id, todo, cb
 		return unless id
 		var obj = todo ? {title: (todo:title or "<untitled>"), completed: (todo:completed or no)} : null
-		@gun.path(id).put(obj, cb)
+		console.log 'put: ', obj
+		@todos.path(id).put(obj, cb)
 		self
 		
 	def uid
@@ -66,10 +67,12 @@ global class TodoModel
 		self
 
 	def load
-		@gun = Gun(window:location:origin + '/gun').get(@key).not(do
-			this.put({"{uid()}": {title: 'Digg it...😋😋😋😋😋😜😜😜😜😜',completed: no}}).key(@key)
+		@gun = Gun(window:location:origin + '/gun')
+		@todos = @gun.get(@key)
+		@todos.not(do
+			@todos.put({"{uid()}": {title: 'Digg it...😋😋😋😋😋😜😜😜😜😜',completed: no}}).key(@key)
 		)
-		@gun.map do |item, id|
+		@todos.map do |item, id|
 			# console.log item, id
 			return unless id
 			var todo = i for i in @items when(i:id == id)
