@@ -16,7 +16,7 @@ global class TodoModel
 		self
 	
 	def sorted
-		items.sort do |a, b|
+		@items.sort do |a, b|
 			let a = a:id.slice(1, 20) # time + random
 			let b = b:id.slice(1, 20)
 			return  1 if a < b # time desc
@@ -44,7 +44,7 @@ global class TodoModel
 		put(uid(), {title: title, completed: no})
 
 	def toggle-all state
-		set-completed(item, state) for item in items
+		set-completed(item, state) for item in @items
 		
 	def set-completed item, completed = yes
 		put(item:id, {title: item:title, completed: completed})
@@ -62,15 +62,16 @@ global class TodoModel
 		put(item:id, {title: title, completed: item:completed})
 
 	def clear-completed
-		items.map do |item| destroy(item) if item:completed
+		let items = []
+		@items.map do |item| items.push(item) if item:completed
+		items.map do |item| destroy(item)
 		self
 
 	def load
 		@gun = Gun(window:location:origin + '/gun')
 		@todos = @gun.get(@key)
-		@todos.not(do
-			@todos.put({"{uid()}": {title: 'Digg it...😋😋😋😋😋😜😜😜😜😜',completed: no}}).key(@key)
-		)
+		@todos.not do
+			add-todo 'Digg it...😋'
 		@todos.map do |item, id|
 			# console.log item, id
 			return unless id
